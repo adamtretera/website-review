@@ -1,15 +1,15 @@
 import Head from "next/head";
+import { useAuth } from "../lib/auth";
 
 export default function Home() {
+	const auth = useAuth();
 	return (
 		<div>
 			<Head>
 				<title>Website reviews</title>
 			</Head>
 
-			<main>
-				<h1 className="font-black font-bold text-center">Adam je borec</h1>
-			</main>
+			<main className="display-gird items-center">Content</main>
 
 			<footer></footer>
 		</div>
