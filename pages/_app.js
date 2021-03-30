@@ -1,11 +1,7 @@
-import "../styles/global.css";
+import "../styles/tailwind.css";
 
 function MyApp({ Component, pageProps }) {
-	return (
-		<div>
-			<h1>Change main page</h1>
-		</div>
-	);
+	return <Component {...pageProps} />;
 }
 
 export default MyApp;

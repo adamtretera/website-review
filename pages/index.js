@@ -8,7 +8,7 @@ export default function Home() {
 			</Head>
 
 			<main>
-				<h1>Adam je borec</h1>
+				<h1 className="font-black font-bold text-center">Adam je borec</h1>
 			</main>
 
 			<footer></footer>
