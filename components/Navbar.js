@@ -11,17 +11,17 @@ function Navbar() {
 			<div className="max-w-full h-full flex justify-between">
 				<div className="flex items-center justify-center text-sm sm:text-xl">
 					<p>Adam Tretera.</p>
-					<li className=" flex items-center justify-center">
+					<li className=" flex items-center justify-center z-50">
 						{theme === "dark" ? (
 							<a
-								className="w-14 h-14 text-2xl  rounded-full bg-primary-700 items-center justify-center flex px-1 hover:bg-opacity-80 transition duration-500 ease"
+								className="w-14 h-14 text-2xl  rounded-full  items-center justify-center flex px-1 hover:bg-opacity-80 transition duration-500 ease"
 								onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
 							>
 								<BiMoon />
 							</a>
 						) : (
 							<a
-								className="w-14 h-14 text-2xl rounded-full bg-primary-100 items-center justify-center flex px-1 hover:bg-opacity-80 transition duration-500 ease"
+								className="w-14 h-14 text-2xl rounded-full items-center justify-center flex px-1 hover:bg-opacity-80 transition duration-500 ease"
 								onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
 							>
 								<BiSun />
