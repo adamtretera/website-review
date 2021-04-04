@@ -1,15 +1,34 @@
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { createSite } from "@/lib/db";
-
+import toast from "react-hot-toast";
+import { useAuth } from "@/lib/auth";
 const AddSiteModal = () => {
 	const initialRef = useRef();
 	const [showModal, setShowModal] = useState(false);
+	const auth = useAuth();
 
-	const { handleSubmit, register } = useForm();
-	const onCreateSite = (values) => {
-		createSite(values);
+	const {
+		handleSubmit,
+		register,
+		formState: { errors },
+	} = useForm();
+	const onCreateSite = ({ site, url }) => {
 		setShowModal(false);
+		toast.promise(
+			createSite({
+				authorId: auth.user.uid,
+				createdAt: new Date().toISOString(),
+				site,
+				url,
+			}),
+			{
+				loading: "Ukládám...",
+				success: <p>Nová stránka přidána.</p>,
+
+				error: <p>Něco se pokazilo.</p>,
+			}
+		);
 	};
 	return (
 		<>
@@ -47,6 +66,8 @@ const AddSiteModal = () => {
 											name="site"
 											{...register("site", { required: true })}
 										></input>
+										{errors.site && <span>Toto pole je povinné.</span>}
+
 										<label className="block p-2">URL adresa</label>
 										<input
 											className="border-2 text-sm  border-black dark:border-white dark:bg-gray-900 w-full py-2 px-4 "
@@ -55,6 +76,7 @@ const AddSiteModal = () => {
 											name="url"
 											{...register("url", { required: true })}
 										></input>
+										{errors.url && <span>Toto pole je povinné.</span>}
 
 										<div className="flex items-center justify-end p-6">
 											<button
