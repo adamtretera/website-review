@@ -19,18 +19,18 @@ export default function Home() {
 					</h1>
 					<div className="container m-auto w-full">
 						<div class="flex flex-wrap -mx-2 mb-8">
-							<div class="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
-								<div class="border-2 border-black h-12 text-sm text-grey-dark flex items-center justify-center dark:border-white dark:bg-black">
+							<div className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
+								<div className="border-2 border-black h-12 text-sm text-grey-dark flex items-center justify-center dark:border-white dark:bg-black">
 									<p>Krok. 1</p>
 								</div>
 							</div>
-							<div class="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
+							<div className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
 								<div class="border-2 border-black h-12 text-sm text-grey-dark flex items-center justify-center dark:border-white dark:bg-black">
 									<p>Krok. 2</p>
 								</div>
 							</div>
-							<div class="w-full lg:w-1/3 px-2">
-								<div class="border-2 border-black h-12 text-sm text-grey-dark flex items-center justify-center dark:border-white dark:bg-black">
+							<div className="w-full lg:w-1/3 px-2">
+								<div className="border-2 border-black h-12 text-sm text-grey-dark flex items-center justify-center dark:border-white dark:bg-black">
 									<p>Krok. 3</p>
 								</div>
 							</div>
