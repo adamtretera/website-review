@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { createSite } from "@/lib/db";
 import toast from "react-hot-toast";
 import { useAuth } from "@/lib/auth";
+import { mutate } from "swr";
+
 const AddSiteModal = () => {
 	const initialRef = useRef();
 	const [showModal, setShowModal] = useState(false);
@@ -14,26 +16,31 @@ const AddSiteModal = () => {
 		formState: { errors },
 	} = useForm();
 	const onCreateSite = ({ site, url }) => {
-		setShowModal(false);
-		toast.promise(
-			createSite({
-				authorId: auth.user.uid,
-				createdAt: new Date().toISOString(),
-				site,
-				url,
-			}),
-			{
-				loading: "Ukládám...",
-				success: <p>Nová stránka přidána.</p>,
+		const newSite = {
+			authorId: auth.user.uid,
+			createdAt: new Date().toISOString(),
+			site,
+			url,
+		};
 
-				error: <p>Něco se pokazilo.</p>,
-			}
+		toast.promise(createSite(newSite), {
+			loading: "Ukládám...",
+			success: <p>Nová stránka přidána.</p>,
+			error: <p>Něco se pokazilo.</p>,
+		});
+		mutate(
+			"/api/sites",
+			async (data) => {
+				return { sites: [...data.sites, newSite] };
+			},
+			false
 		);
+		setShowModal(false);
 	};
 	return (
 		<>
 			<button
-				className="mt-10 bg-white text-black active:bg-pink-600 border-2 border-black dark:border-white dark:bg-black dark:text-white px-6 py-3  outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+				className=" bg-white text-black active:bg-pink-600 border-2 border-black dark:border-white dark:bg-black dark:text-white px-6 py-3  outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 				type="button"
 				onClick={() => setShowModal(true)}
 			>
@@ -80,14 +87,15 @@ const AddSiteModal = () => {
 
 										<div className="flex items-center justify-end p-6">
 											<button
-												className="text-black   background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-4 mb-1 ease-linear transition-all duration-150 border-2 border-black dark:border-white dark:text-white"
+												className="text-black   background-transparent  uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-4 mb-1 ease-linear transition-all duration-150 border-2 border-black dark:border-white dark:text-white"
 												type="button"
 												onClick={() => setShowModal(false)}
 											>
 												Zavřít
 											</button>
 											<button
-												className=" text-black  font-bold uppercase text-sm px-6 py-2 focus:outline-none   mr-4 mb-1 ease-linear transition-all duration-150 border-2 border-black dark:border-white dark:text-white"
+												className=" text-black  
+                                                 uppercase text-sm px-6 py-2 focus:outline-none   mr-4 mb-1 ease-linear transition-all duration-150 border-2 border-black dark:border-white dark:text-white"
 												type="submit"
 											>
 												Uložit

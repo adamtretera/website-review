@@ -2,29 +2,30 @@ import React from "react";
 import { useAuth } from "@/lib/auth";
 import { useTheme } from "next-themes";
 import { BiMoon, BiSun } from "react-icons/bi";
+import Image from "next/image";
 function Navbar() {
 	const { theme, setTheme } = useTheme();
 
 	const auth = useAuth();
 	return (
-		<nav className="h-20 px-8 shadow-lg border-black border-b-2 dark:border-white">
+		<nav className="h-20 px-8 shadow-lg border-black border-b-2 dark:border-white dark:bg-black">
 			<div className="max-w-full h-full flex justify-between">
 				<div className="flex items-center justify-center text-sm sm:text-xl">
 					<p>Adam Tretera.</p>
-					<li className=" flex items-center justify-center z-50">
+					<li className=" flex items-center justify-center ">
 						{theme === "dark" ? (
 							<a
 								className="w-14 h-14 text-2xl  rounded-full  items-center justify-center flex px-1 hover:bg-opacity-80 transition duration-500 ease"
 								onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
 							>
-								<BiMoon />
+								<Image height="24" width="24" src="/moon.svg" />
 							</a>
 						) : (
 							<a
 								className="w-14 h-14 text-2xl rounded-full items-center justify-center flex px-1 hover:bg-opacity-80 transition duration-500 ease"
 								onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
 							>
-								<BiSun />
+								<Image height="24" width="24" src="/sun.svg" />
 							</a>
 						)}
 					</li>
