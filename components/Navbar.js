@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "@/lib/auth";
 import { useTheme } from "next-themes";
 import { BiMoon, BiSun } from "react-icons/bi";
+import Link from "next/link";
 import Image from "next/image";
 function Navbar() {
 	const { theme, setTheme } = useTheme();
@@ -11,7 +12,7 @@ function Navbar() {
 		<nav className="h-20 px-8 shadow-lg border-black border-b-2 dark:border-white dark:bg-black">
 			<div className="max-w-full h-full flex justify-between">
 				<div className="flex items-center justify-center text-sm sm:text-xl">
-					<p>Adam Tretera.</p>
+					<Link href="/dashboard">Weback.</Link>
 					<li className=" flex items-center justify-center ">
 						{theme === "dark" ? (
 							<a

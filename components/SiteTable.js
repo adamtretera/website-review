@@ -8,7 +8,7 @@ const SiteTable = ({ sites }) => {
 	return (
 		<Table>
 			<thead>
-				<Tr className="border-black border-2 dark:border-white">
+				<Tr className="border-black border-2 dark:border-white bg-white dark:bg-black">
 					<Th>Název stránky</Th>
 					<Th>URl adresa</Th>
 					<Th>Feedback link</Th>
@@ -17,14 +17,17 @@ const SiteTable = ({ sites }) => {
 			</thead>
 			<tbody>
 				{sites.map((site) => (
-					<tr key={site.url}>
-						<Td fontWeight="medium">{site.site}</Td>
+					<tr
+						className="bg-white hover:bg-gray-200 transition ease-in duration-100 dark:bg-black"
+						key={site.url}
+					>
+						<Td>{site.site}</Td>
 						<Td>{site.url}</Td>
 						<Td>
-							<Link href={"#"}>
-								<span className="underline cursor-pointer">
+							<Link href={`/feedback/${site.id}`}>
+								<a className="cursor-pointer hover:underline ">
 									Podívat se na feedback
-								</span>
+								</a>
 							</Link>
 						</Td>
 						<Td>

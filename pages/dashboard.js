@@ -1,6 +1,5 @@
 import Head from "next/head";
 import DashboardShell from "@/components/DashboardShell";
-import { mutate } from "swr";
 
 import { useAuth } from "@/lib/auth";
 import EmptyState from "@/components/EmptyState";
@@ -9,7 +8,8 @@ import fetcher from "@/utils/fetcher";
 import SiteTable from "@/components/SiteTable";
 import SiteTableSkeleton from "@/components/SiteTableSkeleton";
 const Dashboard = () => {
-	const { data } = useSWR("/api/sites", fetcher);
+	const { user } = useAuth();
+	const { data } = useSWR(user ? ["/api/sites", user.token] : null, fetcher);
 
 	if (!data) {
 		<DashboardShell>
