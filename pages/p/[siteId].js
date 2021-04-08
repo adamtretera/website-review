@@ -19,19 +19,7 @@ export async function getStaticProps(context) {
 		revalidate: 1,
 	};
 }
-export async function getStaticPaths() {
-	const { sites } = await getAllSites();
-	const paths = sites.map((site) => ({
-		params: {
-			siteId: site.id.toString(),
-		},
-	}));
 
-	return {
-		paths,
-		fallback: false,
-	};
-}
 const FeedbackPage = ({ initialFeedback }) => {
 	const router = useRouter();
 	const [allFeedback, setAllFeedback] = useState(initialFeedback);
