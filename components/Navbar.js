@@ -1,7 +1,6 @@
 import React from "react";
 import { useAuth } from "@/lib/auth";
 import { useTheme } from "next-themes";
-import { BiMoon, BiSun } from "react-icons/bi";
 import Link from "next/link";
 import Image from "next/image";
 function Navbar() {
