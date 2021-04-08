@@ -1,4 +1,3 @@
-import Head from "next/head";
 import DashboardShell from "@/components/DashboardShell";
 
 import { useAuth } from "@/lib/auth";
