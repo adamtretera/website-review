@@ -4,6 +4,7 @@ import { createSite } from "@/lib/db";
 import toast from "react-hot-toast";
 import { useAuth } from "@/lib/auth";
 import { mutate } from "swr";
+import { fromJSON } from "postcss";
 
 const AddSiteModal = () => {
 	const initialRef = useRef();
@@ -13,9 +14,10 @@ const AddSiteModal = () => {
 	const {
 		handleSubmit,
 		register,
+		reset,
 		formState: { errors },
 	} = useForm();
-	const onCreateSite = ({ site, url }) => {
+	const onCreateSite = ({ site, url }, e) => {
 		const newSite = {
 			authorId: auth.user.uid,
 			createdAt: new Date().toISOString(),
@@ -23,19 +25,19 @@ const AddSiteModal = () => {
 			url,
 		};
 
-		toast.promise(createSite(newSite), {
-			loading: "Ukládám...",
-			success: <p>Nová stránka přidána.</p>,
-			error: <p>Něco se pokazilo.</p>,
-		});
+		const { id } = createSite(newSite);
+
+		toast.success("Nová stránka přidána.");
 		mutate(
 			["/api/sites", auth.user.token],
 
-			async (data) => {
-				return { sites: [...data.sites, newSite] };
-			},
+			async (data) => ({
+				sites: [...data.sites, { id, ...newSite }],
+			}),
 			false
 		);
+		reset();
+
 		setShowModal(false);
 	};
 	return (

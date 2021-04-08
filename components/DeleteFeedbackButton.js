@@ -3,6 +3,7 @@ import { mutate } from "swr";
 
 import { deleteFeedback } from "@/lib/db";
 import { useAuth } from "@/lib/auth";
+import toast from "react-hot-toast";
 
 const DeleteFeedbackButton = ({ feedbackId }) => {
 	const [showModal, setShowModal] = useState(false);
@@ -12,6 +13,7 @@ const DeleteFeedbackButton = ({ feedbackId }) => {
 	const onClose = () => setShowModal(false);
 	const onDelete = () => {
 		deleteFeedback(feedbackId);
+		toast.error("Feedback byl smazán");
 
 		mutate(
 			["/api/feedback", auth.user.token],
