@@ -1,5 +1,5 @@
 import { getAllFeedback, getAllSites } from "@/lib/db-admin";
-import Feedback from "@/components/Feedback";
+import FeedbackComp from "@/components/FeedbackComp";
 import DashboardShell from "@/components/DashboardShell";
 import { useAuth } from "@/lib/auth";
 import { useRouter } from "next/router";
@@ -29,7 +29,7 @@ export async function getStaticPaths() {
 	}));
 	return {
 		paths,
-		fallback: false, // See the "fallback" section below
+		fallback: false,
 	};
 }
 
@@ -63,7 +63,7 @@ const SiteFeedback = ({ initialFeedback }) => {
 		<>
 			<DashboardShell>
 				{allFeedback.map((feedback) => (
-					<Feedback key={feedback.id} {...feedback} />
+					<FeedbackComp key={feedback.id} {...feedback} />
 				))}
 				<form onSubmit={handleSubmit(onCreateFeedback)}>
 					<label className="block pt-4 pb-2 text-xl">Nějaký ten feedback</label>
