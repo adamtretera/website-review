@@ -36,24 +36,13 @@ const FeedbackPage = ({ initialFeedback }) => {
 	const router = useRouter();
 	const [allFeedback, setAllFeedback] = useState(initialFeedback);
 
-	const initialRef = useRef(null);
-	const auth = useAuth();
+	const initialRef = useRef();
 
-	const {
-		handleSubmit,
-		register,
-		formState: { errors },
-	} = useForm();
+	const { handleSubmit, register } = useForm();
 
 	const onCreateFeedback = ({ feedback }) => {
 		const newFeedback = {
-			author: auth.user.name,
-			authorId: auth.user.uid,
-			provider: auth.user.provider,
-			siteId: router.query.siteId,
-			createdAt: new Date().toISOString(),
-			feedback: feedback,
-			status: "čeká",
+			author: "axd",
 		};
 		setAllFeedback([newFeedback, ...allFeedback]);
 
@@ -72,7 +61,6 @@ const FeedbackPage = ({ initialFeedback }) => {
 						ref={initialRef}
 						placeholder="Tato stránka se mi moc libí, jenom bych uprail..."
 						name="feedback"
-						{...register("feedback", { required: true })}
 					></input>
 
 					<div className="flex items-center justify-end pt-6">
