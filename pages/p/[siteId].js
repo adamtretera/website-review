@@ -74,9 +74,6 @@ const FeedbackPage = ({ initialFeedback }) => {
 						name="feedback"
 						{...register("feedback", { required: true })}
 					></input>
-					{errors.site && (
-						<span>Jestli chceš dát feedback, toto pole je povinné.</span>
-					)}
 
 					<div className="flex items-center justify-end pt-6">
 						<button
