@@ -1,8 +1,8 @@
 import React from "react";
-import AddSiteModal from "../AddSiteModal";
-import Box from "../Box";
+import AddSiteModal from "@/components/AddSiteModal";
+import Box from "@/components/Box";
 
-import DashboardShell from "../DashboardShell";
+import DashboardShell from "@/components/DashboardShell";
 
 const FreePlanEmptyState = () => (
 	<DashboardShell>

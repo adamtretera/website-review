@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Table, Tr, Th, Td } from "./Table";
 import DeleteFeedbackButton from "./DeleteFeedbackButton";
-import ToggleSwitch from "./ToggleSwitch";
 
 const FeedbackTable = ({ allFeedback }) => {
 	return (

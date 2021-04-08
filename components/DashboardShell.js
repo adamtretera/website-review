@@ -1,6 +1,5 @@
 import React from "react";
 import { useAuth } from "@/lib/auth";
-import AddSiteModal from "./AddSiteModal";
 const DashboardShell = ({ children }) => {
 	const { user, signout } = useAuth();
 

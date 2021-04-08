@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useAuth } from "@/lib/auth";
-import Box from "../components/Box";
 import Link from "next/link";
 export default function Home() {
 	const auth = useAuth();
