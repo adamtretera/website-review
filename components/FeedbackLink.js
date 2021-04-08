@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
-function FeedbackLink({siteId}) {
-    return (
-        <div>
-            
-        </div>
-    );
+function FeedbackLink({ siteId }) {
+	return <div></div>;
 }
 
 export default FeedbackLink;

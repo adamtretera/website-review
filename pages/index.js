@@ -46,9 +46,14 @@ export default function Home() {
 							{auth.user ? (
 								<Link href={"/dashboard"}>Dashboard</Link>
 							) : (
-								<button onClick={(e) => auth.signinWithGitHub()}>
-									Prihlásit se!
-								</button>
+								<div className="flex text-center">
+									<button onClick={(e) => auth.signinWithGitHub()}>
+										Prihlásit se! Github
+									</button>
+									<button onClick={(e) => auth.signinWithGoogle()}>
+										Prihlásit se! přes Google
+									</button>
+								</div>
 							)}
 						</div>
 					</div>

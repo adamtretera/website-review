@@ -3,6 +3,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+	.toggle-checkbox:checked {
+		@apply: right-0 border-green-400;
+		right: 0;
+		border-color: #68d391;
+	}
+	.toggle-checkbox:checked + .toggle-label {
+		@apply: bg-green-400;
+		background-color: #68d391;
+	}
+}
 
 body {
 	font-family: "Titillium Web", sans-serif;
