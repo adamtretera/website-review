@@ -4,7 +4,6 @@ import { createSite } from "@/lib/db";
 import toast from "react-hot-toast";
 import { useAuth } from "@/lib/auth";
 import { mutate } from "swr";
-import { fromJSON } from "postcss";
 
 const AddSiteModal = () => {
 	const initialRef = useRef();
