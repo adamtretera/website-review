@@ -51,9 +51,6 @@ const FeedbackPage = ({ initialFeedback }) => {
 	return (
 		<>
 			<DashboardShell>
-				{allFeedback.map((feedback) => (
-					<Feedback key={feedback.id} {...feedback} />
-				))}
 				<form onSubmit={handleSubmit(onCreateFeedback)}>
 					<label className="block pt-4 pb-2 text-xl">Nějaký ten feedback</label>
 					<input
