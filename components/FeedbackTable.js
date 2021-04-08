@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Table, Tr, Th, Td } from "./Table";
-import Switch from "react-switch";
 import DeleteFeedbackButton from "./DeleteFeedbackButton";
 import ToggleSwitch from "./ToggleSwitch";
 
