@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.13.2",
     "date-fns": "^2.20.0",
     "firebase": "^8.3.2",
     "firebase-admin": "^9.6.0",
