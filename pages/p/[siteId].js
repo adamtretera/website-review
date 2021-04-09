@@ -28,7 +28,7 @@ export async function getStaticPaths() {
 	}));
 	return {
 		paths,
-		fallback: false, // See the "fallback" section below
+		fallback: true,
 	};
 }
 
@@ -61,14 +61,16 @@ const SiteFeedback = ({ initialFeedback }) => {
 	return (
 		<>
 			<DashboardShell>
-				{allFeedback.map((feedback) => (
-					<Feedback key={feedback.id} {...feedback} />
-				))}
+				{allFeedback &&
+					allFeedback.map((feedback) => (
+						<Feedback key={feedback.id} {...feedback} />
+					))}
 				<form onSubmit={handleSubmit(onCreateFeedback)}>
 					<label className="block pt-4 pb-2 text-xl">Nějaký ten feedback</label>
 					<input
 						className="border-2 text-sm bg-white  border-black dark:border-white dark:bg-black w-full py-2 px-4 "
 						ref={initialRef}
+						disabled={router.isFallback}
 						placeholder="Tato stránka se mi moc libí, jenom bych uprail..."
 						name="feedback"
 						{...register("feedback", { required: true })}
