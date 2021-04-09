@@ -10,14 +10,13 @@ import { createFeedback } from "@/lib/db";
 
 export async function getStaticProps(context) {
 	const siteId = context.params.siteId;
-
 	const { feedback } = await getAllFeedback(siteId);
 
 	return {
 		props: {
 			initialFeedback: feedback,
-			revalidate: 1,
 		},
+		revalidate: 1,
 	};
 }
 export async function getStaticPaths() {

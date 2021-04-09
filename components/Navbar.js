@@ -14,17 +14,11 @@ function Navbar() {
 					<Link href="/dashboard">Weback.</Link>
 					<li className=" flex items-center justify-center ">
 						{theme === "dark" ? (
-							<a
-								className="w-14 h-14 text-2xl  rounded-full  items-center justify-center flex px-1 hover:bg-opacity-80 transition duration-500 ease"
-								onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-							>
+							<a onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
 								<Image height="24" width="24" src="/moon.svg" />
 							</a>
 						) : (
-							<a
-								className="w-14 h-14 text-2xl rounded-full items-center justify-center flex px-1 hover:bg-opacity-80 transition duration-500 ease"
-								onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-							>
+							<a onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
 								<Image height="24" width="24" src="/sun.svg" />
 							</a>
 						)}
