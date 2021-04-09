@@ -1,15 +1,30 @@
+import Feedback from "@/components/Feedback";
+import { useAuth } from "@/lib/auth";
+import { createFeedback } from "@/lib/db";
+import { getAllFeedback, getAllSites } from "@/lib/db-admin";
+
 import { useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { useForm } from "react-hook-form";
 
-import DashboardShell from "@/components/DashboardShell";
-import { createFeedback } from "@/lib/db";
+export async function getStaticPaths() {
+	const { sites } = await getAllSites();
+	const paths = sites.map((site) => ({
+		params: {
+			siteId: site.id.toString(),
+		},
+	}));
+
+	return {
+		paths,
+		fallback: false,
+	};
+}
 
 const FeedbackPage = ({ initialFeedback }) => {
 	const router = useRouter();
 	const [allFeedback, setAllFeedback] = useState(initialFeedback);
 
-	const initialRef = useRef();
+	const initialRef = useRef(null);
 
 	const { handleSubmit, register } = useForm();
 
