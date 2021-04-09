@@ -2,23 +2,8 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-import { getAllFeedback, getAllSites } from "@/lib/db-admin";
-import Feedback from "@/components/Feedback";
 import DashboardShell from "@/components/DashboardShell";
 import { createFeedback } from "@/lib/db";
-import { useAuth } from "@/lib/auth";
-
-export async function getStaticProps(context) {
-	const siteId = context.params.siteId;
-	const { feedback } = await getAllFeedback(siteId);
-
-	return {
-		props: {
-			initialFeedback: feedback,
-		},
-		revalidate: 1,
-	};
-}
 
 const FeedbackPage = ({ initialFeedback }) => {
 	const router = useRouter();
