@@ -31,7 +31,7 @@ const AddSiteModal = () => {
 			["/api/sites", auth.user.token],
 
 			async (data) => ({
-				sites: [...data.sites, { id, ...newSite }],
+				sites: [{ id, ...newSite }, ...data.sites],
 			}),
 			false
 		);
