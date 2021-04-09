@@ -13,7 +13,7 @@ const DeleteFeedbackButton = ({ feedbackId }) => {
 	const onClose = () => setShowModal(false);
 	const onDelete = () => {
 		deleteFeedback(feedbackId);
-		toast.error("Feedback byl smazán");
+		toast.error("Feedback byl smazán test ckeclify");
 
 		mutate(
 			["/api/feedback", auth.user.token],
