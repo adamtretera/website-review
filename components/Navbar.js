@@ -27,19 +27,14 @@ function Navbar() {
 				{auth?.user ? (
 					<ul className="max-w-full h-full flex items-center justify-center">
 						<li>
-							<button
-								className="px-4 py-2 mx-4"
-								onClick={(e) => auth.signout()}
-							>
-								Log out
-							</button>
+							<Link className="cursor-pointer px-4 py-2 mx-4" href={"/account"}>
+								{auth.user ? auth.user.email : "None"}
+							</Link>
 						</li>
-						<li className="mx-4 hidden sm:block">
-							<div>{auth.user ? auth.user.email : "None"}</div>
-						</li>
+
 						<li>
 							<img
-								className="rounded-full mx-4 w-12 border-black border-2 dark:border-white"
+								className=" rounded-full mx-4 w-12 border-black border-2 dark:border-white"
 								src={auth.user.photoUrl}
 							></img>
 						</li>

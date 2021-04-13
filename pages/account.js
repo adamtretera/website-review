@@ -1,9 +1,33 @@
 import { useState } from "react";
+import Page from "@/components/Page";
 
 import { useAuth } from "@/lib/auth";
-import { createCheckoutSession, goToBillingPortal } from "@/lib/db";
+import { goToBillingPortal } from "@/lib/db";
 import DashboardShell from "@/components/DashboardShell";
 import Box from "@/components/Box";
+const SettingsTable = ({ stripeRole, children }) => (
+	<div className="mt-5">
+		<div className="flex justify-between">
+			<h4 className="text-lg">Nastavení</h4>
+			<span className="text-lg font-bold">Předplatné: {stripeRole}</span>
+		</div>
+		<div className="flex p-4 pt-0">{children}</div>
+	</div>
+);
+const FeedbackUsage = () => (
+	<section className="grid grid-cols-2 text-left gap-6">
+		<div className="w-full col-span-2 sm:col-span-1 p-6 border-2 border-black dark:border-white">
+			<h4 className="font-bold text-lg">Feedback</h4>
+			<p className="text-lg">∞</p>
+			<p className="text-lg ">10,000 limit</p>
+		</div>
+		<div className="w-full col-span-2 sm:col-span-1 p-6 border-2 border-black dark:border-white">
+			<h4 className="font-bold text-lg">Feedback</h4>
+			<p className="text-lg">∞</p>
+			<p className="text-lg">10,000 limit</p>
+		</div>
+	</section>
+);
 
 const Account = () => {
 	const { user, signout } = useAuth();
@@ -13,16 +37,34 @@ const Account = () => {
 	return (
 		<DashboardShell>
 			<Box>
+				<div className="block m-auto text-center">
+					<img
+						className="w-32 rounded-full border-2 border-black dark:border-white m-auto"
+						src={user ? user.photoUrl : "null"}
+					/>
+					<h1 className="font-bold text-2xl mt-2">
+						{user ? user.name : "None"}
+					</h1>
+					<h3> {user ? user.email : "None"}</h3>
+					<SettingsTable stripeRole={user?.stripeRole} />
+					<FeedbackUsage />
+					<p className="text-md text-left pt-6">
+						Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+						Pellentesque pretium lectus id turpis. Duis risus. Aliquam erat
+						volutpat. Nullam feugiat, turpis at pulvinar vulputate, erat libero
+						tristique tellus, nec bibendum odio risus sit amet ante.
+					</p>
+				</div>
+			</Box>
+			<div className="flex justify-end mt-4">
 				<button
 					className=" bg-white text-black active:bg-pink-600 border-2 border-black dark:border-white dark:bg-black dark:text-white px-6 py-3  outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-					type="button"
 					onClick={() => {
-						setCheckoutLoading(true);
-						createCheckoutSession(user.uid);
+						setBillingLoading(true);
+						goToBillingPortal();
 					}}
 				>
-					{" "}
-					{isCheckoutLoading ? (
+					{isBillingLoading ? (
 						<div className="flex items-center">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -53,32 +95,24 @@ const Account = () => {
 						</div>
 					) : (
 						<div className="flex items-center">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								className="h-5 w-5 mr-3 fill-current"
-							>
-								<path d="M3.414,13.778L2,15.192l4.949,2.121l2.122,4.95l1.414-1.414l-0.707-3.536l3.313-3.313l3.61,7.704l1.339-1.339l-1.19-10.123 l2.828-2.829c0.781-0.781,0.781-2.047,0-2.828c-0.781-0.781-2.048-0.781-2.828,0l-2.903,2.903L3.824,6.297L2.559,7.563l7.644,3.67 l-3.253,3.253L3.414,13.778z"></path>
-							</svg>
-							<p>Upgradovat plán na startovač</p>
+							<p>Nastavení platby</p>
 						</div>
 					)}
 				</button>
 				<button
 					className=" bg-white text-black active:bg-pink-600 border-2 border-black dark:border-white dark:bg-black dark:text-white px-6 py-3  outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-					onClick={() => {
-						setBillingLoading(true);
-						goToBillingPortal();
-					}}
+					onClick={() => signout()}
 				>
-					View Billing Portal
+					Odhlásit
 				</button>
-				<button onClick={() => signout()}>Log Out</button>
-			</Box>
+			</div>
 		</DashboardShell>
 	);
 };
+const AccountPage = () => (
+	<Page name="Účet" path="/account">
+		<Account />
+	</Page>
+);
 
-export default Account;
+export default AccountPage;
