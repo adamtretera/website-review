@@ -6,7 +6,6 @@ export default function Home() {
 	return (
 		<div>
 			<Head>
-				<title>Website reviews Weback</title>
 				<script
 					dangerouslySetInnerHTML={{
 						__html: `

@@ -1,4 +1,5 @@
 import DashboardShell from "@/components/DashboardShell";
+import Page from "@/components/Page";
 
 import { useAuth } from "@/lib/auth";
 import EmptyState from "@/components/skeletons/EmptyState";
@@ -33,4 +34,10 @@ const MyFeedback = () => {
 	);
 };
 
-export default MyFeedback;
+const MyFeedbackPage = () => (
+	<Page name="Můj feedback" path="/feedback">
+		<MyFeedback />
+	</Page>
+);
+
+export default MyFeedbackPage;
