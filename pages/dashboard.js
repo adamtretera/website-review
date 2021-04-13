@@ -1,4 +1,5 @@
 import DashboardShell from "@/components/DashboardShell";
+import Page from "@/components/Page";
 
 import { useAuth } from "@/lib/auth";
 import useSWR from "swr";
@@ -40,7 +41,7 @@ const Dashboard = () => {
 };
 const DashboardPage = () => (
 	<Page name="Moje stránky" path="/dashboard">
-		<MyFeedback />
+		<Dashboard />
 	</Page>
 );
 
