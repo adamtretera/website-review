@@ -12,7 +12,7 @@ const AddSiteModal = () => {
 
 	const {
 		handleSubmit,
-		register,
+		register,  
 		reset,
 		formState: { errors },
 	} = useForm();
