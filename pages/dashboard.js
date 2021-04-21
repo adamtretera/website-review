@@ -23,6 +23,7 @@ const Dashboard = () => {
 			</DashboardShell>
 		);
 	}
+
 	if (data.sites.length) {
 		return (
 			<DashboardShell>

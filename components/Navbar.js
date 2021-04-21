@@ -11,7 +11,7 @@ function Navbar() {
 		<nav className="h-20 px-8 shadow-lg border-black border-b-2 dark:border-white dark:bg-black">
 			<div className="max-w-full h-full flex justify-between">
 				<div className="flex items-center justify-center text-sm sm:text-xl">
-					<Link href="/dashboard">Weback.</Link>
+					<Link href="/dashboard">Feedback na web. </Link>
 					<li className=" flex items-center justify-center ">
 						{theme === "dark" ? (
 							<a onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
@@ -40,7 +40,7 @@ function Navbar() {
 						</li>
 					</ul>
 				) : (
-					<button onClick={(e) => auth.signinWithGithub()}>Sign In</button>
+					<></>
 				)}
 			</div>
 		</nav>

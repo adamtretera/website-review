@@ -11,6 +11,7 @@ import FeedbackTableHeader from "@/components/FeedbackTableHeader";
 const MyFeedback = () => {
 	const { user } = useAuth();
 	const { data } = useSWR(user ? ["/api/feedback", user.token] : null, fetcher);
+
 	if (!data?.feedback) {
 		return (
 			<DashboardShell>

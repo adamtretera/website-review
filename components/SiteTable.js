@@ -24,7 +24,7 @@ const SiteTable = ({ sites }) => {
 						<Td>{site.site}</Td>
 						<Td>{site.url}</Td>
 						<Td>
-							<Link href={`/p/${site.id}`}>
+							<Link href={`/site/${site.id}`}>
 								<a className="cursor-pointer hover:underline ">
 									Podívat se na feedback
 								</a>
