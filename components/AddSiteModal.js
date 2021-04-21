@@ -22,6 +22,11 @@ const AddSiteModal = () => {
 			createdAt: new Date().toISOString(),
 			site,
 			url,
+			settings: {
+				icons: true,
+				timestamp: true,
+				ratings: false,
+			},
 		};
 
 		const { id } = createSite(newSite);
