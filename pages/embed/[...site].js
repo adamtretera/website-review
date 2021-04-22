@@ -38,7 +38,12 @@ const EmbeddedFeedbackPage = ({ initialFeedback, site }) => {
 			<FeedbackLink paths={router.query.site} />
 			{initialFeedback?.length ? (
 				initialFeedback.map((feedback, index) => (
-					<Feedback key={feedback.id} {...feedback} />
+					<Feedback
+						key={feedback.id}
+						settings={site?.settings}
+						isLast={index === initialFeedback.length - 1}
+						{...feedback}
+					/>
 				))
 			) : (
 				<div>Nejsou tu žadné feedbaky na tuto stránku.</div>
