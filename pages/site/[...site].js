@@ -18,12 +18,11 @@ export async function getStaticProps(context) {
 	return {
 		props: {
 			initialFeedback: feedback,
-			site,
+			site: site,
 		},
 		revalidate: 1,
 	};
 }
-
 export async function getStaticPaths() {
 	const { sites } = await getAllSites();
 	const paths = sites.map((site) => ({
@@ -40,15 +39,10 @@ export async function getStaticPaths() {
 
 const FeedbackPage = ({ initialFeedback, site }) => {
 	const { user, loading } = useAuth();
+
 	const router = useRouter();
-	const [allFeedback, setAllFeedback] = useState(initialFeedback);
-	const [allSite, setAllSite] = useState(site);
 
 	const [siteId, route] = router.query.site;
-	console.log(allSite);
-	useEffect(() => {
-		setAllFeedback(initialFeedback);
-	}, [initialFeedback]);
 
 	const initialRef = useRef(null);
 	const {
@@ -59,14 +53,6 @@ const FeedbackPage = ({ initialFeedback, site }) => {
 	const onCreateFeedback = ({ feedback }) => {
 		const newFeedback = {
 			siteId,
-
-			route: route || "/",
-			author: user.name,
-			authorId: user.uid,
-			text: inputEl.current.value,
-			createdAt: new Date().toISOString(),
-			provider: user.provider,
-			status: "pending",
 		};
 		createFeedback(newFeedback);
 		setAllFeedback([newFeedback, ...allFeedback]);
@@ -93,17 +79,13 @@ const FeedbackPage = ({ initialFeedback, site }) => {
 				route={route}
 			/>
 
-			{allFeedback &&
-				allFeedback.map((feedback, index) => (
-					<Feedback
-						key={feedback.id}
-						settings={site?.settings}
-						isLast={index === allFeedback.length - 1}
-						{...feedback}
-					/>
+			{initialFeedback &&
+				initialFeedback.map((feedback, index) => (
+					<Feedback key={feedback.id} settings={site?.settings} {...feedback} />
 				))}
 			<form onSubmit={handleSubmit(onCreateFeedback)}>
 				<label className="block pt-4 pb-2 text-xl">Nějaký ten feedback</label>
+
 				<input
 					className="border-2 text-sm bg-white  border-black dark:border-white dark:bg-black w-full py-2 px-4 "
 					ref={initialRef}

@@ -2,8 +2,7 @@ import React from "react";
 import NextLink from "next/link";
 import EditSiteModal from "@/components/EditSiteModal";
 const SiteHeader = ({ isSiteOwner, site, siteId, route }) => {
-	const siteName = site?.name;
-	console.log(siteName);
+	const siteName = site?.site;
 
 	return (
 		<>

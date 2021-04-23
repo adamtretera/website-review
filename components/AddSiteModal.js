@@ -34,7 +34,6 @@ const AddSiteModal = () => {
 		toast.success("Nová stránka přidána.");
 		mutate(
 			["/api/sites", auth.user.token],
-
 			async (data) => ({
 				sites: [{ id, ...newSite }, ...data.sites],
 			}),

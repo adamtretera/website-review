@@ -6,7 +6,7 @@ import { useAuth } from "@/lib/auth";
 import { updateFeedback } from "@/lib/db";
 import DeleteFeedbackButton from "./DeleteFeedbackButton";
 
-const FeedbackRow = ({ id, author, text, route, status }) => {
+const FeedbackRow = ({ id, author, feedback, route, status }) => {
 	const auth = useAuth();
 	const isChecked = status === "active";
 	const toggleFeedback = async () => {
@@ -20,7 +20,7 @@ const FeedbackRow = ({ id, author, text, route, status }) => {
 			key={id}
 		>
 			<Td>{author}</Td>
-			<Td>{text}</Td>
+			<Td>{feedback}</Td>
 			<Td>
 				<p>{route || "/"}</p>
 			</Td>

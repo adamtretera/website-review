@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/router";
-import "iframe-resizer/js/iframeResizer.contentWindow";
 import { getAllFeedback, getAllSites, getSite } from "@/lib/db-admin";
 import Feedback from "@/components/Feedback";
 import FeedbackLink from "@/components/FeedbackLink";
@@ -30,6 +29,7 @@ export async function getStaticPaths() {
 		fallback: true,
 	};
 }
+
 const EmbeddedFeedbackPage = ({ initialFeedback, site }) => {
 	const router = useRouter();
 
