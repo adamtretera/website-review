@@ -5,23 +5,21 @@ import { deleteFeedback } from "@/lib/db";
 import { useAuth } from "@/lib/auth";
 import toast from "react-hot-toast";
 
-const DeleteFeedbackButton = ({ feedbackId }) => {
+const DeleteSiteButton = ({ siteId }) => {
 	const [showModal, setShowModal] = useState(false);
 	const cancelRef = useRef();
 	const auth = useAuth();
 
 	const onClose = () => setShowModal(false);
 	const onDelete = () => {
-		deleteFeedback(feedbackId);
-		toast.error("Feedback byl smazán");
+		deleteFeedback(siteId);
+		toast.error("Feedback byl smazán test ckeclify");
 
 		mutate(
-			["/api/feedback", auth.user.token],
+			["/api/sites", auth.user.token],
 			async (data) => {
 				return {
-					feedback: data.feedback.filter(
-						(feedback) => feedback.id !== feedbackId
-					),
+					sites: data.sites.filter((site) => site.id !== siteId),
 				};
 			},
 			false
@@ -62,7 +60,8 @@ const DeleteFeedbackButton = ({ feedbackId }) => {
 									className="flex items-start justify-between p-5 pb-2"
 								>
 									<h3 className="text-3xl font-semibold ">
-										Opravdu chcete odstranit feedback ?
+										Opravdu chcete odstranit stránku ? Toto odstraní také všehny
+										feedbaky k této stránce.
 									</h3>
 								</div>
 
@@ -90,4 +89,4 @@ const DeleteFeedbackButton = ({ feedbackId }) => {
 		</>
 	);
 };
-export default DeleteFeedbackButton;
+export default DeleteSiteButton;

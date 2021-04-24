@@ -3,6 +3,7 @@ import { Table, Tr, Th, Td } from "./Table";
 import { parseISO, format } from "date-fns";
 import Link from "next/link";
 import { cs } from "date-fns/locale";
+import DeleteSiteButton from "./DeleteSiteButton";
 
 const SiteTable = ({ sites }) => {
 	return (
@@ -13,6 +14,7 @@ const SiteTable = ({ sites }) => {
 					<Th>URl adresa</Th>
 					<Th>Feedback link</Th>
 					<Th>Datum přídání</Th>
+					<Th></Th>
 				</Tr>
 			</thead>
 			<tbody>
@@ -24,7 +26,7 @@ const SiteTable = ({ sites }) => {
 						<Td>{site.site}</Td>
 						<Td>{site.url}</Td>
 						<Td>
-							<Link href={`/p/${site.id}`}>
+							<Link href="/site/[siteId]" as={`/site/${site.id}`} passHref>
 								<a className="cursor-pointer hover:underline ">
 									Podívat se na feedback
 								</a>
@@ -32,6 +34,9 @@ const SiteTable = ({ sites }) => {
 						</Td>
 						<Td>
 							{format(parseISO(site.createdAt), "d. MMM y", { locale: cs })}
+						</Td>
+						<Td>
+							<DeleteSiteButton siteId={site.id} />
 						</Td>
 					</tr>
 				))}

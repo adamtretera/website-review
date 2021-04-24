@@ -1,22 +1,22 @@
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { createSite } from "@/lib/db";
+import { updateSite } from "@/lib/db";
 import toast from "react-hot-toast";
 import { useAuth } from "@/lib/auth";
 import { mutate } from "swr";
 
-const AddSiteModal = () => {
+const EditSiteModal = () => {
 	const initialRef = useRef();
 	const [showModal, setShowModal] = useState(false);
 	const auth = useAuth();
 
 	const {
 		handleSubmit,
-		register,  
+		register,
 		reset,
 		formState: { errors },
 	} = useForm();
-	const onCreateSite = ({ site, url }, e) => {
+	const onUpdateSite = ({ site, url }, e) => {
 		const newSite = {
 			authorId: auth.user.uid,
 			createdAt: new Date().toISOString(),
@@ -31,9 +31,10 @@ const AddSiteModal = () => {
 
 		const { id } = createSite(newSite);
 
-		toast.success("Nová stránka přidána.");
+		toast.success("Stránka byla upravena.");
 		mutate(
 			["/api/sites", auth.user.token],
+
 			async (data) => ({
 				sites: [{ id, ...newSite }, ...data.sites],
 			}),
@@ -50,7 +51,7 @@ const AddSiteModal = () => {
 				type="button"
 				onClick={() => setShowModal(true)}
 			>
-				Přidat stránku
+				Upravit stránku
 			</button>
 			{showModal ? (
 				<>
@@ -70,7 +71,7 @@ const AddSiteModal = () => {
 									<p className="my-4 text-lg leading-relaxed">
 										Přidejte novou stránku na feedback.
 									</p>
-									<form onSubmit={handleSubmit(onCreateSite)}>
+									<form onSubmit={handleSubmit(onUpdateSite)}>
 										<label className="block p-2">Jméno</label>
 										<input
 											className="border-2 text-sm  border-black dark:border-white dark:bg-gray-900 w-full py-2 px-4 "
@@ -119,4 +120,4 @@ const AddSiteModal = () => {
 	);
 };
 
-export default AddSiteModal;
+export default EditSiteModal;

@@ -27,7 +27,6 @@ const FeedbackTableSkeleton = () => {
 					<Th>Feedback</Th>
 					<Th>Route</Th>
 					<Th>Viditelnost</Th>
-					<Th>{""}</Th>
 				</Tr>
 			</thead>
 			<tbody>
