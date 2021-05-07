@@ -7,6 +7,7 @@ function Navbar() {
 	const { theme, setTheme } = useTheme();
 
 	const auth = useAuth();
+	console.log(auth.user);
 	return (
 		<nav className="h-20 px-8 shadow-lg border-black border-b-2 dark:border-white dark:bg-black">
 			<div className="max-w-full h-full flex justify-between">

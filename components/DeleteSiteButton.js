@@ -13,7 +13,7 @@ const DeleteSiteButton = ({ siteId }) => {
 	const onClose = () => setShowModal(false);
 	const onDelete = () => {
 		deleteFeedback(siteId);
-		toast.error("Feedback byl smazán test ckeclify");
+		toast.error("Feedback byl smazán");
 
 		mutate(
 			["/api/sites", auth.user.token],

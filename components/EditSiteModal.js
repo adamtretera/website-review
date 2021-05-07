@@ -2,13 +2,15 @@ import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { updateSite } from "@/lib/db";
 import toast from "react-hot-toast";
-import { useAuth } from "@/lib/auth";
 import { mutate } from "swr";
+import { Switch } from "@headlessui/react";
 
-const EditSiteModal = () => {
+const EditSiteModal = ({ settings, siteId, children }) => {
 	const initialRef = useRef();
 	const [showModal, setShowModal] = useState(false);
-	const auth = useAuth();
+	const [enabledTimeStamp, setEnabledTimeStamp] = useState(settings?.timestamp);
+	const [enabledIcons, setEnabledIcons] = useState(settings?.icons);
+	const [enabledRatings, setEnabledRatings] = useState(settings?.ratings);
 
 	const {
 		handleSubmit,
@@ -16,30 +18,13 @@ const EditSiteModal = () => {
 		reset,
 		formState: { errors },
 	} = useForm();
-	const onUpdateSite = ({ site, url }, e) => {
-		const newSite = {
-			authorId: auth.user.uid,
-			createdAt: new Date().toISOString(),
-			site,
-			url,
-			settings: {
-				icons: true,
-				timestamp: true,
-				ratings: false,
-			},
-		};
-
-		const { id } = createSite(newSite);
-
+	const onUpdateSite = async () => {
+		console.log(enabledTimeStamp, enabledRatings, enabledIcons);
+		//await updateSite(siteId, {
+		//	settings: enabledTimeStamp,
+		//});
 		toast.success("Stránka byla upravena.");
-		mutate(
-			["/api/sites", auth.user.token],
-
-			async (data) => ({
-				sites: [{ id, ...newSite }, ...data.sites],
-			}),
-			false
-		);
+		mutate(`/api/site/${siteId}`);
 		reset();
 
 		setShowModal(false);
@@ -62,35 +47,67 @@ const EditSiteModal = () => {
 									style={{ minWidth: "40vw" }}
 									className="flex items-start justify-between p-5 pb-2"
 								>
-									<h3 className="text-3xl font-semibold">
-										Přidat novu stránku.
-									</h3>
+									<h3 className="text-3xl font-semibold">Změnit stránku.</h3>
 								</div>
 
 								<div className="relative p-6 pt-0 flex-auto">
-									<p className="my-4 text-lg leading-relaxed">
-										Přidejte novou stránku na feedback.
-									</p>
 									<form onSubmit={handleSubmit(onUpdateSite)}>
-										<label className="block p-2">Jméno</label>
-										<input
-											className="border-2 text-sm  border-black dark:border-white dark:bg-gray-900 w-full py-2 px-4 "
-											ref={initialRef}
-											placeholder="Moje stránka"
-											name="site"
-											{...register("site", { required: true })}
-										></input>
-										{errors.site && <span>Toto pole je povinné.</span>}
+										<Switch.Group as="div" className="flex gap-10 py-4">
+											<Switch.Label passive>Povolit čas</Switch.Label>
+											<Switch
+												checked={enabledTimeStamp}
+												onChange={setEnabledTimeStamp}
+												name="timestamp"
+												className={`${
+													enabledTimeStamp
+														? "dark:bg-gray-900 bg-gray-200"
+														: "bg-gray-900 "
+												} relative inline-flex items-center h-6 border-2 dark:border-white border-black rounded-lg   w-12`}
+											>
+												<span className="sr-only">Enable notifications</span>
+												<span
+													className={`${
+														enabledTimeStamp
+															? "translate-x-6 border-black bg-white   "
+															: "translate-x-1  bg-gray-900 border-white"
+													} inline-block w-4 h-4 transform border-2 dark:bg-white rounded-full `}
+												/>
+											</Switch>
+											<Switch.Label passive>Povolit ikonky</Switch.Label>
 
-										<label className="block p-2">URL adresa</label>
-										<input
-											className="border-2 text-sm  border-black dark:border-white dark:bg-gray-900 w-full py-2 px-4 "
-											ref={initialRef}
-											placeholder="https://mojewebovka.com"
-											name="url"
-											{...register("url", { required: true })}
-										></input>
-										{errors.url && <span>Toto pole je povinné.</span>}
+											<Switch
+												checked={enabledIcons}
+												onChange={setEnabledIcons}
+												name="icons"
+												className={`${
+													enabledIcons ? "bg-blue-600" : "bg-gray-200"
+												} relative inline-flex items-center h-6 rounded-full w-11`}
+											>
+												<span className="sr-only">Enable notifications</span>
+												<span
+													className={`${
+														enabledIcons ? "translate-x-6" : "translate-x-1"
+													} inline-block w-4 h-4 transform bg-white rounded-full`}
+												/>
+											</Switch>
+											<Switch.Label passive>Povolit hodnocení</Switch.Label>
+
+											<Switch
+												checked={enabledRatings}
+												onChange={setEnabledRatings}
+												name="timestamp"
+												className={`${
+													enabledRatings ? "bg-blue-600" : "bg-gray-200"
+												} relative inline-flex items-center h-6 rounded-full w-11`}
+											>
+												<span className="sr-only">Enable notifications</span>
+												<span
+													className={`${
+														enabledRatings ? "translate-x-6" : "translate-x-1"
+													} inline-block w-4 h-4 transform bg-white rounded-full`}
+												/>
+											</Switch>
+										</Switch.Group>
 
 										<div className="flex items-center justify-end p-6">
 											<button
